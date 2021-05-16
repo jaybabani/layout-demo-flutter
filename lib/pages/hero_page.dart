@@ -16,8 +16,7 @@ class HeroHeader implements SliverPersistentHeaderDelegate {
   double minExtent;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -44,9 +43,7 @@ class HeroHeader implements SliverPersistentHeaderDelegate {
           top: 4.0,
           child: SafeArea(
             child: IconButton(
-              icon: Icon(layoutGroup == LayoutGroup.nonScrollable
-                  ? Icons.filter_1
-                  : Icons.filter_2),
+              icon: Icon(layoutGroup == LayoutGroup.nonScrollable ? Icons.filter_1 : Icons.filter_2),
               onPressed: onLayoutToggle,
             ),
           ),
@@ -54,10 +51,26 @@ class HeroHeader implements SliverPersistentHeaderDelegate {
         Positioned(
           left: 16.0,
           right: 16.0,
-          bottom: 16.0,
+          bottom: 40.0,
           child: Text(
             'Hero Image',
             style: TextStyle(fontSize: 32.0, color: Colors.white),
+          ),
+        ),
+        Positioned(
+          left: 0.0,
+          right: 0.0,
+          bottom: 0.0,
+          child: Container(
+            height: 20.0,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: const Radius.circular(20.0),
+                topRight: const Radius.circular(20.0),
+              )
+            ),
+            // color: Colors.grey[300],
           ),
         ),
       ],
@@ -73,8 +86,7 @@ class HeroHeader implements SliverPersistentHeaderDelegate {
   FloatingHeaderSnapConfiguration get snapConfiguration => null;
 
   @override
-  OverScrollHeaderStretchConfiguration get stretchConfiguration =>
-      OverScrollHeaderStretchConfiguration();
+  OverScrollHeaderStretchConfiguration get stretchConfiguration => OverScrollHeaderStretchConfiguration();
 }
 
 class HeroPage extends StatelessWidget implements HasLayoutGroup {
@@ -106,32 +118,53 @@ class HeroPage extends StatelessWidget implements HasLayoutGroup {
       child: CustomScrollView(
         slivers: <Widget>[
           SliverPersistentHeader(
+
+            // Odis like effect
             pinned: true,
+            floating: false,
             delegate: HeroHeader(
               layoutGroup: layoutGroup,
               onLayoutToggle: onLayoutToggle,
-              minExtent: 150.0,
+              minExtent: 80.0,
               maxExtent: 250.0,
             ),
+
+            // Odis like effect 2
+            // pinned: true,
+            // floating: true,
+            // delegate: HeroHeader(
+            //   layoutGroup: layoutGroup,
+            //   onLayoutToggle: onLayoutToggle,
+            //   minExtent: 50.0,
+            //   maxExtent: 200.0,
+            // ),
+
+
+
+
+
           ),
-          SliverGrid(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200.0,
-              mainAxisSpacing: 0.0,
-              crossAxisSpacing: 0.0,
-              childAspectRatio: 0.75,
-            ),
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Container(
-                  alignment: Alignment.center,
-                  padding: _edgeInsetsForIndex(index),
-                  child: Image.asset(
-                    assetNames[index % assetNames.length],
-                  ),
-                );
-              },
-              childCount: assetNames.length * 2,
+          SliverPadding(
+            padding: const EdgeInsets.all(10.0),
+            sliver: SliverGrid(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200.0,
+                mainAxisSpacing: 0.0,
+                crossAxisSpacing: 10.0,
+                childAspectRatio: 0.75,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return Container(
+                    alignment: Alignment.center,
+                    padding: _edgeInsetsForIndex(index),
+                    child: Image.asset(
+                      assetNames[index % assetNames.length],
+                    ),
+                  );
+                },
+                childCount: assetNames.length * 3,
+              ),
             ),
           ),
         ],

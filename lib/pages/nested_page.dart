@@ -38,7 +38,7 @@ class NestedPage extends StatelessWidget implements HasLayoutGroup {
       Colors.red,
       Colors.orange
     ];
-    double height = 136.0;
+    double height = 156.0;
     return SizedBox(
       height: height,
       child: ListView.builder(

@@ -68,12 +68,13 @@ class _MainPageState extends State<MainPage> {
         icon,
         color: _colorTabMatching(layoutSelection: layoutSelection),
       ),
-      title: Text(
-        text,
-        style: TextStyle(
-          color: _colorTabMatching(layoutSelection: layoutSelection),
-        ),
-      ),
+      label: text,
+      // title: Text(
+      //   text,
+      //   style: TextStyle(
+      //     color: _colorTabMatching(layoutSelection: layoutSelection),
+      //   ),
+      // ),
     );
   }
 
